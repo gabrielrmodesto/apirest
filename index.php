@@ -7,16 +7,11 @@ require_once 'vendor/autoload.php';
 
 $app = new \Slim\App();
 
-
-$app->get("/[{nome}]", function(Request $request, Response $response, array $args) {
-    $limit = $request->getQueryParams()['limit'] ?? 10;
-    $nome = $args['nome'] ?? 'mouse';
-
-    return $response->getBody()->write("{$limit} Produtos listados no BD com o nome {$nome}");
+$app->post('/', function(Request $request, Response $response, array $args){
+    $data = $request->getParsedBody();
+    $nome = $data['nome'] ?? '';
+    return $response->getBody()->write("Produto {$nome}");
+    
 });
-
-// $app->get('/',function($request, $response, $args){
-//     return $response->getBody()->write('Hello World');
-// });
 
 $app->run();
