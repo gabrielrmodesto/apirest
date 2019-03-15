@@ -5,26 +5,30 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 require_once 'vendor/autoload.php';
 
-$app = new \Slim\App();
+$configuration = [
+    'settings' => [
+        'displayErrorDetails' => true,
+    ],
+];
+$configuration = new \Slim\Container($configuration);
 
-$app->post('/', function(Request $request, Response $response, array $args){
-    $data = $request->getParsedBody();
-    $nome = $data['nome'] ?? '';
-    return $response->getBody()->write("Produto {$nome} (POST)");
-    
-});
-$app->put('/', function(Request $request, Response $response, array $args){ 
-    $data = $request->getParsedBody();
-    $nome = $data['nome'] ?? '';
-    return $response->getBody()->write("Produto {$nome} (PUT)");
-});
+//middleware
+$mid01 = function(Request $request, Response $response, $next): Response{
+    $response->getBody()->write("Middleware 1<br>");
+    $response = $next($request, $response);
+    $response->getBody()->write("<br>Middleware 2");
 
-$app->delete('/', function(Request $request, Response $response, array $args){
+    return $response;
+};
+
+$app = new \Slim\App($configuration);
+
+$app->post('/', function(Request $request, Response $response, array $args): Response{
     $data = $request->getParsedBody();
     $nome = $data['nome'] ?? '';
-    return $response->getBody()->write("Produto {$nome} (DELETE)");
-    
-});
+    $response->getBody()->write("Produto {$nome} (POST)");
+    return $response;
+})->add($mid01);
 
 $app->run();
     
