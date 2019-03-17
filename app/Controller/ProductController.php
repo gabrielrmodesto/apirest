@@ -7,14 +7,24 @@ use Psr\Http\Message\ResponseInterface as Response;
 use App\DAO\GerenciadorDeLojas\LojasDAO;
 
 final class ProductController{
-    public function getProducts(Request $request, Response $response, array $args): Response{
-        //$response->getBody()->write("Hello world");
-        $response = $response->withJson([
-            "message" => "Hello world",
-        ]);
+    public function getProdutos(Request $request, Response $response, array $args): Response{
 
-        $lojasDAO = new LojasDAO();
-        $lojasDAO->teste();
+ 
         return $response;
+    }
+    public function insertProduto(Request $request, Response $response, array $args): Response{
+
+ 
+        return $response;
+    }
+    public function updateProduto(Request $request, Response $response, array $args): Response{
+
+ 
+        return $response;
+    }
+    public function deleteProduto(Request $request, Response $response, array $args): Response{
+
+ 
+        return $response;  
     }
 }
