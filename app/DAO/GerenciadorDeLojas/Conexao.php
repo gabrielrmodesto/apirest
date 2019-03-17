@@ -18,5 +18,11 @@ abstract class Conexao{
         $dsn = "mysql:host={$host};dbname={$dbname};port={$port}";
 
         $this->pdo = new \PDO($dsn,$user,$password);
+
+        //Configurando exceptions
+        $this->pdo->setAttribute(
+            \PDO::ATTR_ERRMODE,
+            \PDO::ERRMODE_EXCEPTION
+        );
     }
 }

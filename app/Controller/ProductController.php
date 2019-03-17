@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use App\DAO\GerenciadorDeLojas\LojasDAO;
 
 final class ProductController{
     public function getProducts(Request $request, Response $response, array $args): Response{
@@ -11,6 +12,9 @@ final class ProductController{
         $response = $response->withJson([
             "message" => "Hello world",
         ]);
+
+        $lojasDAO = new LojasDAO();
+        $lojasDAO->teste();
         return $response;
     }
 }
