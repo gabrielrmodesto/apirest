@@ -7,15 +7,9 @@ class LojasDAO extends Conexao{
     {
         parent::__construct();   
     }
-    public function teste(){
-        $lojas = $this->pdo
-                ->query('SELECT * FROM lojas;')
-                ->fetchAll(\PDO::FETCH_ASSOC);
-
-        echo "<pre>";
-        foreach($lojas as $loja){
-            var_dump($loja);
-        }
-        die;
+    public function getAllLojas(): array{
+        $lojas = $this->pdo->query('SELECT * FROM lojas')
+                           ->fetchAll(\PDO::FETCH_ASSOC);
+        return $lojas;
     }
 }

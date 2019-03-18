@@ -8,7 +8,7 @@ $app = new \Slim\App(slimConfiguration());
 
 //rotas para o crud do projeto
 //4 rotas para a loja, criar, ler, alterar e deletar loja
-$app->get('/loja', LojaController::class, ':getLojas'); //le a loja
+$app->get('/', LojaController::class, ':getLojas'); //le a loja
 $app->post('/loja', LojaController::class, ':insertLoja'); //cria a loja
 $app->put('/loja', LojaController::class, ':updateLoja'); //altera a loja
 $app->delete('/loja', LojaController::class, ':deleteLoja'); //deleta a loja
