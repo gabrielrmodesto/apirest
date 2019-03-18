@@ -15,11 +15,17 @@ final class LojaController{
         return $response;
     }
     public function insertLoja(Request $request, Response $response, array $args): Response{
+        $data = $request->getParsedBody();
+
         $lojaDAO = new LojasDAO();
         $loja = new LojaModel();
-        $loja->setNome('');
-        $loja->setTelefone('');
-        $loja->setEndereco('');
+        $loja->setNome($data['nome'])
+             ->setTelefone($data['telefone'])
+             ->setEndereco($data['endereco']);
+        $lojaDAO->insertLoja($loja);
+        $response = $response->withJson([
+            'message' => 'Inserido com sucessso no banco'
+        ]);
         return $response;
     }
     public function updateLoja(Request $request, Response $response, array $args): Response{

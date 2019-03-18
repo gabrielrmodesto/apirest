@@ -38,6 +38,7 @@ final class LojaModel{
     */
     public function setNome(string $nome): LojaModel{
         $this->nome = $nome;
+        return $this;
     }
     /**
     * @return string
@@ -51,6 +52,7 @@ final class LojaModel{
     */
     public function setTelefone(string $telefone): LojaModel{
         $this->telefone = $telefone;
+        return $this;
     }
     /**
     * @return string
@@ -64,6 +66,7 @@ final class LojaModel{
     */
     public function setEndereco(string $endereco): LojaModel{
         $this->endereco = $endereco;
+        return $this;
     }
 
 }
