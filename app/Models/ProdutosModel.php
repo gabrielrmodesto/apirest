@@ -72,7 +72,7 @@ final class ProdutosModel{
      * @return float
      */
     public function getPreco(): float{
-        return $this->id;
+        return $this->preco;
     }
     /**
      * setPreco
