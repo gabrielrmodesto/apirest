@@ -8,5 +8,12 @@ class ProdutosDAO extends Conexao{
         parent::__construct();
     }
 
-    
+    public function getAllProdutos(int $loja_id): array{
+        $stament = $this->pdo->prepare('SELECT * FROM produtos where loja_id = :loja_id;');
+        $stament->bindParam(':loja_id', $loja_id, \PDO::PARAM_INT);
+        $stament->execute();
+        $produtos = $stament->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $produtos;
+    }
 }

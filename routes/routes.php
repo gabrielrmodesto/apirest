@@ -21,5 +21,5 @@ $app->group('', function() use ($app){
     $app->post('/produto', ProductController::class . ':insertProduto'); //cria a produto
     $app->put('/produto', ProductController::class . ':updateProduto'); //altera a produto
     $app->delete('/produto', ProductController::class . ':deleteProduto'); //deleta a produto
-})->add(basicAuth());
+});
 $app->run();
