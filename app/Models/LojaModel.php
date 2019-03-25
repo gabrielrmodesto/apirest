@@ -27,6 +27,17 @@ final class LojaModel{
         return $this->id;
     }
     /**
+     * setId
+     *
+     * @param  mixed $id
+     *
+     * @return LojaModel
+     */
+    public function setId(int $id): LojaModel{
+        $this->id = $id;
+        return $this;
+    }
+    /**
     * @return string
     */
     public function getNome(): string{

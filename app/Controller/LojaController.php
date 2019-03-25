@@ -29,11 +29,30 @@ final class LojaController{
         return $response;
     }
     public function updateLoja(Request $request, Response $response, array $args): Response{
+        $data = $request->getParsedBody();
+        $queryParams = $request->getQueryParams();
 
+        $lojaDAO = new LojasDAO();
+        $loja = new LojaModel();
+        $id = (int)$queryParams['id'];
+        $loja->setNome($data['nome'])
+             ->setTelefone($data['telefone'])
+             ->setEndereco($data['endereco']);
+        $lojaDAO->updateLoja($loja,$id);
+        $response = $response->withJson([
+            'message' => 'Atualizado com sucessso no banco'
+        ]);
         return $response;
     }
     public function deleteLoja(Request $request, Response $response, array $args): Response{
-
+        $data = $request->getQueryParams();
+        
+        $lojaDAO = new LojasDAO();
+        $id = (int)$data['id'];
+        $lojaDAO->deleteLoja($id);
+        $response = $response->withJson([
+            'message' => 'Deletado com sucessso no banco'
+        ]);
         return $response;    
     }
 }

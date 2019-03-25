@@ -29,4 +29,26 @@ class LojasDAO extends Conexao{
                 'endereco' => $loja->getEndereco()
         ]);
     }
+    public function updateLoja(LojaModel $loja, int $id): void{
+        $statement = $this->pdo
+                    ->prepare('UPDATE lojas 
+                                SET nome = :nome, 
+                                    telefone = :telefone, 
+                                    endereco = :endereco
+                                    WHERE id = :id;');
+        $statement->execute([
+                                'nome' => $loja->getNome(),
+                                'telefone' => $loja->getTelefone(),
+                                'endereco' => $loja->getEndereco(),
+                                'id' => $id
+                            ]);
+    }
+    public function deleteLoja(int $id): void{
+        $statement = $this->pdo
+                    ->prepare('DELETE FROM produtos WHERE loja_id = :id;
+                               DELETE FROM lojas WHERE id = :id;');
+        $statement->execute([
+                                'id' => $id
+                            ]);
+    }
 }
