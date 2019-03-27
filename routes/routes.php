@@ -4,8 +4,11 @@ use function src\slimConfiguration;
 use App\Controller\ProductController;
 use App\Controller\LojaController;
 use function src\basicAuth;
+use App\Controller\AuthController;
 
 $app = new \Slim\App(slimConfiguration());
+
+$app->post('/login', AuthController::class.':login');
 
 //agroupar rotas
 $app->group('', function() use ($app){
