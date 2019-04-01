@@ -35,7 +35,8 @@ final class AuthController{
 
         $token = JWT::encode($tokenPayLoad, getenv('JWT_SECRET_KEY'));
         $refreshTokenPayload = [
-            'email' => $usuario->getEmail()
+            'email' => $usuario->getEmail(),
+            'random' => uniqid()
         ];
         $refreshToken = JWT::encode($refreshTokenPayload, getenv('JWT_SECRET_KEY'));
         

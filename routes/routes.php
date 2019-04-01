@@ -5,10 +5,22 @@ use App\Controller\ProductController;
 use App\Controller\LojaController;
 use function src\basicAuth;
 use App\Controller\AuthController;
+use Tuupola\Middleware\JwtAuthentication;
+use function src\jwtAuth;
 
 $app = new \Slim\App(slimConfiguration());
 
 $app->post('/login', AuthController::class.':login');
+
+$app->get('/teste', function() { echo "oi";})
+    ->add(function($request, $response, $next){
+        $token = $request->getAttribute('jwt');
+        echo "<pre>";
+        var_dump($token);
+        $response = $next($request,$response);
+        return $response;
+    })
+    ->add(jwtAuth()); 
 
 //agroupar rotas
 $app->group('', function() use ($app){
