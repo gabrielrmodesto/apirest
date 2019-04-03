@@ -3,18 +3,17 @@
 use function src\slimConfiguration;
 use App\Controller\ProductController;
 use App\Controller\LojaController;
-use function src\basicAuth;
 use App\Controller\AuthController;
-use Tuupola\Middleware\JwtAuthentication;
 use function src\jwtAuth;
 use App\Middleware\JwtDateTimeMiddleware;
+use function src\basicAuth;
 
 $app = new \Slim\App(slimConfiguration());
 
 $app->post('/login', AuthController::class.':login');
 
 $app->get('/teste', function() { echo "oi";})
-    ->add(new JwtDateTimeMiddleware())())
+    ->add(new JwtDateTimeMiddleware())
     ->add(jwtAuth()); 
 
 //agroupar rotas
@@ -31,5 +30,5 @@ $app->group('', function() use ($app){
     $app->post('/produto', ProductController::class . ':insertProduto'); //cria a produto
     $app->put('/produto', ProductController::class . ':updateProduto'); //altera a produto
     $app->delete('/produto', ProductController::class . ':deleteProduto'); //deleta a produto
-});
+})->add(basicAuth());
 $app->run();
